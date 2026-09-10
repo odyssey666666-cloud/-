@@ -1,0 +1,1478 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>吴佳毅 | AI / Web3 · 社群运营 · 内容与项目协作</title>
+  <meta
+    name="description"
+    content="吴佳毅，深圳大学金融科技-区块链专业大二在读，ABFinance 学生大使，参与 OPC 社区与 SZUBA 的活动组织、BD 和社群运营。查看经历、下载一页简历或联系。"
+  />
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --ink: #151515;
+      --muted: #5e6673;
+      --line: rgba(21, 21, 21, 0.13);
+      --panel: rgba(255, 255, 255, 0.84);
+      --panel-solid: #ffffff;
+      --accent: #00a6a6;
+      --accent-2: #ff5b4a;
+      --accent-3: #c4d600;
+      --shadow: 0 18px 70px rgba(20, 24, 32, 0.12);
+      --radius: 8px;
+      --max: 1120px;
+      color-scheme: light;
+      font-family:
+        Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+        sans-serif;
+    }
+
+    [data-theme="dark"] {
+      --bg: #11100f;
+      --ink: #f3f1eb;
+      --muted: #b7b1a7;
+      --line: rgba(243, 241, 235, 0.17);
+      --panel: rgba(27, 26, 24, 0.82);
+      --panel-solid: #1b1a18;
+      --accent: #24d3c3;
+      --accent-2: #ff7668;
+      --accent-3: #d7ef5f;
+      --shadow: 0 22px 80px rgba(0, 0, 0, 0.35);
+      color-scheme: dark;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(90deg, rgba(0, 166, 166, 0.07) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(255, 91, 74, 0.06) 1px, transparent 1px),
+        var(--bg);
+      background-size: 88px 88px;
+      color: var(--ink);
+      line-height: 1.6;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .skip-link {
+      position: fixed;
+      left: 16px;
+      top: -80px;
+      z-index: 20;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 10px 12px;
+      background: var(--panel-solid);
+      color: var(--ink);
+      transition: top 160ms ease;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    .shell {
+      min-height: 100vh;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--bg) 86%, transparent);
+      backdrop-filter: blur(18px);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      width: min(var(--max), calc(100% - 36px));
+      margin: 0 auto;
+      padding: 14px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 160px;
+      font-weight: 800;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border-radius: var(--radius);
+      background: var(--ink);
+      color: var(--bg);
+      font-size: 14px;
+      letter-spacing: 0;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .nav a {
+      border-radius: 999px;
+      padding: 8px 12px;
+      color: var(--muted);
+      font-size: 14px;
+      transition:
+        background 160ms ease,
+        color 160ms ease;
+      white-space: nowrap;
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      background: color-mix(in srgb, var(--accent) 14%, transparent);
+      color: var(--ink);
+      outline: none;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      min-width: 170px;
+    }
+
+    .icon-btn,
+    .text-btn {
+      display: inline-grid;
+      min-width: 38px;
+      height: 38px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      color: var(--ink);
+      cursor: pointer;
+      transition:
+        transform 160ms ease,
+        border-color 160ms ease,
+        background 160ms ease;
+    }
+
+    .text-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: auto;
+      padding: 0 12px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .icon-btn:hover,
+    .text-btn:hover,
+    .icon-btn:focus-visible,
+    .text-btn:focus-visible {
+      transform: translateY(-1px);
+      border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+      outline: none;
+    }
+
+    .icon {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    main {
+      width: min(var(--max), calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      min-height: 520px;
+      align-items: center;
+      padding: 34px 0 26px;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.68fr);
+      gap: 32px;
+      align-items: center;
+    }
+
+    #signalCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.68;
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .pulse {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent-3);
+      box-shadow: 0 0 0 7px color-mix(in srgb, var(--accent-3) 19%, transparent);
+    }
+
+    h1 {
+      max-width: 820px;
+      margin: 0;
+      font-size: 88px;
+      line-height: 0.92;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .role-line {
+      max-width: 770px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 24px;
+      line-height: 1.35;
+      font-weight: 650;
+    }
+
+    .role-line strong {
+      color: var(--ink);
+    }
+
+    .hero-copy {
+      max-width: 760px;
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .quick-contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 44px;
+      border-radius: var(--radius);
+      padding: 0 15px;
+      font-weight: 800;
+      transition:
+        transform 160ms ease,
+        box-shadow 160ms ease;
+    }
+
+    .primary-btn {
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: var(--bg);
+      box-shadow: 0 12px 28px color-mix(in srgb, var(--ink) 18%, transparent);
+    }
+
+    .secondary-btn {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+    }
+
+    .primary-btn:hover,
+    .secondary-btn:hover,
+    .primary-btn:focus-visible,
+    .secondary-btn:focus-visible {
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .signal-board {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .signal-node {
+      min-height: 96px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+      background: color-mix(in srgb, var(--panel-solid) 84%, transparent);
+    }
+
+    .signal-node b {
+      display: block;
+      font-size: 15px;
+      line-height: 1.25;
+    }
+
+    .signal-node span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .signal-node:nth-child(2) {
+      border-top: 4px solid var(--accent);
+    }
+
+    .signal-node:nth-child(3) {
+      border-top: 4px solid var(--accent-2);
+    }
+
+    .signal-node:nth-child(4) {
+      border-top: 4px solid var(--accent-3);
+    }
+
+    .signal-node:nth-child(5) {
+      border-top: 4px solid var(--ink);
+    }
+
+    .center-chip {
+      grid-column: 1 / -1;
+      color: var(--ink);
+      padding-bottom: 4px;
+    }
+
+    .center-chip strong {
+      display: block;
+      font-size: 16px;
+      line-height: 1.2;
+    }
+
+    .center-chip small {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.25;
+    }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 14px;
+      left: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .scroll-cue span:first-child {
+      display: inline-block;
+      width: 28px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      position: relative;
+    }
+
+    .scroll-cue span:first-child::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 9px;
+      width: 4px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--accent);
+      transform: translateX(-50%);
+      animation: wheel 1.3s ease infinite;
+    }
+
+    @keyframes wheel {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, 0);
+      }
+      35% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, 14px);
+      }
+    }
+
+    section {
+      scroll-margin-top: calc(var(--nav-height, 80px) + 16px);
+      padding: 34px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.34fr) minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
+      margin-bottom: 22px;
+    }
+
+    .section-kicker {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 32px;
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .section-lead {
+      max-width: 780px;
+      margin: 13px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .metric-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      background: var(--panel);
+      min-height: 96px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 32px;
+      line-height: 1;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 16px;
+    }
+
+    .tile,
+    .timeline-item,
+    .fit-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: 0 12px 35px rgba(20, 24, 32, 0.06);
+    }
+
+    .tile {
+      min-height: 190px;
+      padding: 18px;
+    }
+
+    .tile h3,
+    .timeline-item h3,
+    .fit-card h3 {
+      margin: 0;
+      font-size: 21px;
+      line-height: 1.25;
+    }
+
+    .tile p,
+    .fit-card p {
+      margin: 12px 0 0;
+      color: var(--muted);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0 10px;
+      background: color-mix(in srgb, var(--panel-solid) 55%, transparent);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: minmax(150px, 0.3fr) minmax(0, 1fr);
+      gap: 20px;
+      padding: 24px;
+    }
+
+    .timeline-date {
+      color: var(--accent-2);
+      font-weight: 900;
+    }
+
+    .timeline-item ul {
+      margin: 14px 0 0;
+      padding-left: 19px;
+      color: var(--muted);
+    }
+
+    .timeline-item li + li {
+      margin-top: 8px;
+    }
+
+    .focus-map {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .focus-card {
+      position: relative;
+      min-height: 154px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+      background: var(--panel);
+      overflow: hidden;
+    }
+
+    .focus-card::before {
+      content: attr(data-index);
+      position: absolute;
+      right: 14px;
+      bottom: -12px;
+      color: color-mix(in srgb, var(--ink) 10%, transparent);
+      font-size: 82px;
+      font-weight: 950;
+      line-height: 1;
+    }
+
+    .focus-card h3 {
+      position: relative;
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.25;
+    }
+
+    .focus-card p {
+      position: relative;
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .skill-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .skill-row {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr);
+      gap: 16px;
+      align-items: start;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 17px;
+      background: var(--panel);
+    }
+
+    .skill-row strong {
+      font-size: 16px;
+    }
+
+    .skill-row p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .fit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .fit-card {
+      min-height: 124px;
+      padding: 18px;
+    }
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: center;
+      padding: 8px 0;
+    }
+
+    .contact-panel h2 {
+      font-size: 32px;
+    }
+
+    .contact-panel p {
+      max-width: 720px;
+      margin: 12px 0 0;
+      color: var(--muted);
+    }
+
+    .copy-box {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 8px;
+      background: var(--panel-solid);
+    }
+
+    .copy-box textarea {
+      width: 310px;
+      max-width: 100%;
+      min-height: 72px;
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      font: inherit;
+      line-height: 1.6;
+      resize: vertical;
+      overflow-wrap: anywhere;
+    }
+
+    footer {
+      width: min(var(--max), calc(100% - 36px));
+      margin: 0 auto;
+      border-top: 1px solid var(--line);
+      padding: 26px 0 42px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 30;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      background: var(--panel-solid);
+      color: var(--ink);
+      box-shadow: var(--shadow);
+      transform: translateY(18px);
+      opacity: 0;
+      transition:
+        opacity 180ms ease,
+        transform 180ms ease;
+      pointer-events: none;
+    }
+
+    .toast.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .topbar-inner {
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+
+      .brand,
+      .actions {
+        min-width: auto;
+      }
+
+      .nav {
+        order: 3;
+        flex-basis: 100%;
+        min-width: 0;
+        width: 100%;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 2px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 44px;
+      }
+
+      .hero-grid,
+      .section-head,
+      .skills,
+      .contact-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .signal-board {
+        display: none;
+      }
+
+      .metric-strip,
+      .focus-map,
+      .fit-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 660px) {
+      main,
+      footer,
+      .topbar-inner {
+        width: min(100% - 24px, var(--max));
+      }
+
+      .text-btn span {
+        display: none;
+      }
+
+      .hero {
+        padding: 36px 0;
+      }
+
+      h1 {
+        font-size: 56px;
+      }
+
+      .role-line {
+        font-size: 20px;
+      }
+
+      .metric-strip,
+      .grid-2,
+      .focus-map,
+      .fit-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-item,
+      .skill-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .contact-panel {
+        padding: 0;
+      }
+
+      .copy-box {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .copy-box textarea {
+        width: 100%;
+      }
+
+      h2 { font-size: 28px; }
+      .nav { gap: 2px; }
+      .nav a { font-size: 13px; padding: 8px 7px; }
+      .quick-contact .tag { max-width: 100%; overflow-wrap: anywhere; }
+      .hero { padding-bottom: 30px; }
+    }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    .primary-btn:focus-visible, .secondary-btn:focus-visible,
+    .icon-btn:focus-visible, .text-btn:focus-visible, .nav a:focus-visible {
+      outline: 2px solid var(--accent); outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+
+    @media print {
+      :root, [data-theme="dark"] {
+        --bg: #ffffff;
+        --ink: #111111;
+        --muted: #4a4a4a;
+        --line: rgba(0, 0, 0, 0.18);
+        --panel: #ffffff;
+        --panel-solid: #ffffff;
+      }
+
+      body {
+        background: #ffffff;
+      }
+
+      .topbar,
+      #signalCanvas,
+      .scroll-cue,
+      .hero-actions,
+      .toast,
+      .copy-box {
+        display: none !important;
+      }
+
+      main,
+      footer {
+        width: 100%;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 20px 0;
+      }
+
+      .hero-grid,
+      .section-head,
+      .skills,
+      .contact-panel {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        break-inside: avoid;
+        padding: 24px 0;
+      }
+
+      .signal-board {
+        display: none;
+      }
+
+      .tile,
+      .timeline-item,
+      .fit-card,
+      .metric,
+      .focus-card,
+      .skill-row,
+      .contact-panel {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#content">跳到主要内容</a>
+  <div class="shell">
+    <header class="topbar" aria-label="页面导航">
+      <div class="topbar-inner">
+        <a class="brand" href="#top" aria-label="返回顶部">
+          <span class="brand-mark">WY</span>
+          <span>吴佳毅</span>
+        </a>
+        <nav class="nav" aria-label="简历章节">
+          <a href="#profile">概览</a>
+          <a href="#strengths">能力</a>
+          <a href="#experience">经历</a>
+          <a href="#focus">方向</a>
+          <a href="#skills">技能</a>
+          <a href="#fit">机会</a>
+          <a href="#contact">联系</a>
+        </nav>
+        <div class="actions">
+          <button class="icon-btn" id="themeToggle" type="button" aria-label="切换主题" title="切换主题">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3v2"></path>
+              <path d="M12 19v2"></path>
+              <path d="M4.22 4.22l1.42 1.42"></path>
+              <path d="M18.36 18.36l1.42 1.42"></path>
+              <path d="M3 12h2"></path>
+              <path d="M19 12h2"></path>
+              <path d="M4.22 19.78l1.42-1.42"></path>
+              <path d="M18.36 5.64l1.42-1.42"></path>
+              <circle cx="12" cy="12" r="4"></circle>
+            </svg>
+          </button>
+          <a class="text-btn" href="Wu_Jiayi_General_Resume_CN.pdf" download="Wu_Jiayi_General_Resume_CN.pdf" aria-label="下载一页简历 PDF" title="下载一页简历 PDF">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 15V3"></path>
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <path d="m7 10 5 5 5-5"></path>
+            </svg>
+            <span>简历 PDF</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main id="content">
+      <section class="hero" id="top" aria-label="简历首页">
+        <canvas id="signalCanvas" aria-hidden="true"></canvas>
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow"><span class="pulse"></span>AI x Web3 Early Builder</div>
+            <h1>吴佳毅</h1>
+            <p class="role-line">
+              深圳大学金融科技-区块链专业<strong>大二在读</strong><br />
+              <strong>社群运营 · 内容创作 · BD · 项目协作</strong>
+            </p>
+            <p class="hero-copy">
+              两年 AI / Web3 学习与生态参与经验。现任 ABFinance 学生大使，参与深圳大学 OPC 社区和 SZUBA 的活动组织、社群运营与对外合作。
+            </p>
+            <div class="quick-contact" aria-label="快速联系方式">
+              <a class="tag" href="mailto:Odyssey666666@gmail.com">Odyssey666666@gmail.com</a>
+              <span class="tag">微信 18816796441</span>
+            </div>
+            <div class="hero-actions">
+              <a class="primary-btn" href="#experience">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 12h14"></path>
+                  <path d="M13 6l6 6-6 6"></path>
+                </svg>
+                查看经历
+              </a>
+              <a class="secondary-btn" href="#contact">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 4h16v16H4z"></path>
+                  <path d="M22 6l-10 7L2 6"></path>
+                </svg>
+                联系方式
+              </a>
+            </div>
+          </div>
+
+          <div class="signal-board" aria-label="能力概览">
+            <div class="center-chip">
+              <span>
+                <strong>Learning by Doing</strong>
+                <small>从行业理解到实际参与</small>
+              </span>
+            </div>
+            <div class="signal-node">
+              <b>AI Tools</b>
+              <span>Vibe Coding / 原型探索</span>
+            </div>
+            <div class="signal-node">
+              <b>Web3</b>
+              <span>Bittensor / SNS / Sentient</span>
+            </div>
+            <div class="signal-node">
+              <b>Community</b>
+              <span>OPC / SZUBA 社群与活动</span>
+            </div>
+            <div class="signal-node">
+              <b>Languages</b>
+              <span>中文 / English / 粤语</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="profile">
+        <div class="section-head">
+          <div class="section-kicker">01 Profile</div>
+          <div>
+            <h2>AI / Web3 学习与实践</h2>
+            <p class="section-lead">
+              在工具体验、项目交流与社区协作中学习，将行业信息转化为内容、活动和原型尝试。
+            </p>
+          </div>
+        </div>
+        <div class="metric-strip">
+          <div class="metric">
+            <strong>2年</strong>
+            <span>持续接触 AI / Web3 相关内容和项目生态</span>
+          </div>
+          <div class="metric">
+            <strong>大二</strong>
+            <span>深圳大学金融科技-区块链专业在读</span>
+          </div>
+          <div class="metric">
+            <strong>OPC / SZUBA</strong>
+            <span>活动组织、BD、社群运营与市场投研</span>
+          </div>
+          <div class="metric">
+            <strong>3语</strong>
+            <span>中文、英文、粤语沟通与内容表达</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="strengths">
+        <div class="section-head">
+          <div class="section-kicker">02 Strengths</div>
+          <div>
+            <h2>核心优势</h2>
+          </div>
+        </div>
+        <div class="grid-2">
+          <article class="tile">
+            <h3>快速学习与新领域理解</h3>
+            <p>
+              两年 AI / Web3 学习与生态参与经验，结合市场投研、项目交流和工具试用理解新领域，关注项目定位、用户需求和实际体验。
+            </p>
+            <div class="tag-row">
+              <span class="tag">Bittensor</span>
+              <span class="tag">Solana Name Service</span>
+              <span class="tag">Finternet</span>
+              <span class="tag">Sentient</span>
+            </div>
+          </article>
+          <article class="tile">
+            <h3>社区运营与活动协作</h3>
+            <p>
+              参与 OPC 社区的黑客松等活动组织、BD 与社群运营，以及 SZUBA 的活动策划和社区建设，积累对外沟通与团队协作经验。
+            </p>
+            <div class="tag-row">
+              <span class="tag">社群运营</span>
+              <span class="tag">活动策划</span>
+              <span class="tag">BD / 对外合作</span>
+            </div>
+          </article>
+          <article class="tile">
+            <h3>AI 辅助创作与原型探索</h3>
+            <p>
+              熟悉使用 AI 工具进行资料整理、内容创作、想法拆解和 Vibe Coding，能把模糊想法快速推进到可讨论、可验证的初步形态。
+            </p>
+            <div class="tag-row">
+              <span class="tag">Vibe Coding</span>
+              <span class="tag">内容生成</span>
+              <span class="tag">产品构思</span>
+            </div>
+          </article>
+          <article class="tile">
+            <h3>多语言与跨社区沟通</h3>
+            <p>
+              能使用中文、英文、粤语进行沟通和内容表达，适合参与国际化 Web3 社区、双语内容整理、项目方沟通和学生社区协作。
+            </p>
+            <div class="tag-row">
+              <span class="tag">中文</span>
+              <span class="tag">English</span>
+              <span class="tag">粤语</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="experience">
+        <div class="section-head">
+          <div class="section-kicker">03 Experience</div>
+          <div>
+            <h2>经历</h2>
+          </div>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item">
+            <div class="timeline-date">深圳大学</div>
+            <div>
+              <h3>金融科技-区块链专业 · 本科二年级在读</h3>
+              <ul>
+                <li>系统学习金融科技、区块链与相关技术方向，关注技术如何进入真实金融和协作场景。</li>
+                <li>持续关注 AI 与 Web3 交叉领域，形成面向行业动态、社区传播和产品机会的观察习惯。</li>
+              </ul>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <div class="timeline-date">OPC 社区</div>
+            <div>
+              <h3>深圳大学 OPC 社区 | 活动组织 / BD / 社群运营</h3>
+              <ul>
+                <li>参与组织黑客松等活动，协同推进活动筹备与执行。</li>
+                <li>参与对外商务拓展，在合作交流中理解需求、传递信息。</li>
+                <li>参与社群运营与社区互动，支持活动与社区建设。</li>
+              </ul>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <div class="timeline-date">ABFinance</div>
+            <div><h3>学生大使 · 现任</h3></div>
+          </article>
+          <article class="timeline-item">
+            <div class="timeline-date">SZUBA</div>
+            <div>
+              <h3>深圳大学区块链协会 | 社群运营 / 活动策划 / 市场投研</h3>
+              <ul>
+                <li>参与协会社群运营，协助维护社区讨论氛围和成员参与感。</li>
+                <li>参与 AI、Web3、区块链相关主题活动的策划与执行。</li>
+                <li>跟踪项目和市场动态，参与基础研究、资料整理和内容表达。</li>
+                <li>协助协会与项目方、学生社区和活动资源建立连接。</li>
+              </ul>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <div class="timeline-date">生态参与</div>
+            <div>
+              <h3>Web3 项目活动与社区协作</h3>
+              <ul>
+                <li>参与与 Bittensor、Solana Name Service、Finternet、Sentient 等项目方的活动合作。</li>
+                <li>理解项目传播、用户教育、社区活动和生态合作在项目增长中的作用。</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="focus">
+        <div class="section-head">
+          <div class="section-kicker">04 Focus</div>
+          <div>
+            <h2>关注方向</h2>
+            <p class="section-lead">
+              AI x Web3、金融科技基础设施、社区增长和 AI 辅助原型探索。
+            </p>
+          </div>
+        </div>
+        <div class="focus-map">
+          <article class="focus-card" data-index="01">
+            <h3>AI x Web3</h3>
+            <p>去中心化 AI、算力网络、数据网络、AI Agent 与新型协作机制。</p>
+          </article>
+          <article class="focus-card" data-index="02">
+            <h3>金融科技基础设施</h3>
+            <p>区块链在支付、身份、资产和金融基础设施中的应用。</p>
+          </article>
+          <article class="focus-card" data-index="03">
+            <h3>社区增长与用户教育</h3>
+            <p>把复杂技术议题转化为更容易理解、参与和传播的内容与活动。</p>
+          </article>
+          <article class="focus-card" data-index="04">
+            <h3>AI 辅助原型探索</h3>
+            <p>使用 AI 工具快速整理信息、拆解需求、生成内容和验证产品想法。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="section-head">
+          <div class="section-kicker">05 Skills</div>
+          <div>
+            <h2>技能</h2>
+            <p class="section-lead">
+              可投入运营、内容、研究、活动和 AI 工具辅助的产品探索任务。
+            </p>
+          </div>
+        </div>
+        <div class="skills">
+          <div class="skill-list">
+            <div class="skill-row">
+              <strong>语言能力</strong>
+              <p>中文、英文、粤语沟通与内容表达，可支持双语内容整理和跨社区沟通。</p>
+            </div>
+            <div class="skill-row">
+              <strong>运营能力</strong>
+              <p>社群运营、黑客松等活动组织、BD、社交媒体内容及项目方活动协作。</p>
+            </div>
+            <div class="skill-row">
+              <strong>研究能力</strong>
+              <p>Web3 项目研究、市场信息整理、行业趋势跟踪和基础投研表达。</p>
+            </div>
+            <div class="skill-row">
+              <strong>AI 工具</strong>
+              <p>AI 辅助写作、资料整理、Vibe Coding、产品想法拆解和原型探索。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="fit">
+        <div class="section-head">
+          <div class="section-kicker">06 Fit</div>
+          <div>
+            <h2>适合机会</h2>
+            <p class="section-lead">
+              面向 AI、Web3、金融科技、社区运营、内容研究、市场投研和产品增长相关机会。
+            </p>
+          </div>
+        </div>
+        <div class="fit-grid">
+          <article class="fit-card">
+            <h3>AI / Web3 社区运营实习</h3>
+            <p>适合承担社群维护、活动协助、社区内容和用户教育任务。</p>
+          </article>
+          <article class="fit-card">
+            <h3>内容研究 / 市场投研助理</h3>
+            <p>适合承担资料整理、项目分析、热点追踪和基础研究表达。</p>
+          </article>
+          <article class="fit-card">
+            <h3>AI 产品 / 增长方向实习</h3>
+            <p>适合参与需求拆解、竞品观察、内容转化和原型想法验证。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="contact-panel">
+          <div>
+            <div class="section-kicker">Contact</div>
+            <h2>欢迎联系</h2>
+            <p>
+              邮箱：<a href="mailto:Odyssey666666@gmail.com">Odyssey666666@gmail.com</a><br />
+              微信：18816796441
+            </p>
+          </div>
+          <div class="copy-box" aria-label="复制联系方式">
+            <textarea id="contactInput" rows="2" readonly aria-label="联系方式，可选择并手动复制">微信 18816796441 | 邮箱 Odyssey666666@gmail.com</textarea>
+            <button class="text-btn" id="copyContact" type="button">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 8h12v12H8z"></path>
+                <path d="M4 16V4h12"></path>
+              </svg>
+              复制
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>吴佳毅 | AI x Web3 Resume</span>
+      <span> · </span>
+      <span>更新于 2026-09-10 · <a href="general-capabilities-resume-cn.html">一页简历网页版</a></span>
+    </footer>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite">已复制联系方式</div>
+
+  <script>
+    const themeTarget = document.documentElement;
+    const themeToggle = document.getElementById("themeToggle");
+    const canvas = document.getElementById("signalCanvas");
+    const ctx = canvas.getContext("2d");
+    const copyContact = document.getElementById("copyContact");
+    const contactInput = document.getElementById("contactInput");
+    const toast = document.getElementById("toast");
+
+    const colorScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    let savedTheme;
+    try { savedTheme = localStorage.getItem("resume-theme"); } catch {}
+    const initialTheme = ["light", "dark"].includes(savedTheme) ? savedTheme : (colorScheme.matches ? "dark" : "light");
+    setTheme(initialTheme);
+
+    function setTheme(theme) {
+      themeTarget.dataset.theme = theme;
+      themeToggle.setAttribute("aria-pressed", String(theme === "dark"));
+      themeToggle.setAttribute("aria-label", theme === "dark" ? "切换为浅色主题" : "切换为深色主题");
+      themeToggle.title = themeToggle.getAttribute("aria-label");
+    }
+
+    themeToggle.addEventListener("click", () => {
+      const nextTheme = themeTarget.dataset.theme === "dark" ? "light" : "dark";
+      setTheme(nextTheme);
+      savedTheme = nextTheme;
+      try { localStorage.setItem("resume-theme", nextTheme); } catch {}
+      syncAnimation();
+    });
+
+    colorScheme.addEventListener("change", event => {
+      if (!["light", "dark"].includes(savedTheme)) {
+        setTheme(event.matches ? "dark" : "light");
+        syncAnimation();
+      }
+    });
+
+    copyContact.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(contactInput.value);
+        showToast("已复制联系方式");
+      } catch {
+        contactInput.focus({ preventScroll: true });
+        contactInput.select();
+        let copied = false;
+        try { copied = document.execCommand("copy"); } catch {}
+        showToast(copied ? "已复制联系方式" : "自动复制不可用，联系方式已选中");
+      }
+    });
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("is-visible");
+      window.clearTimeout(showToast.timer);
+      showToast.timer = window.setTimeout(() => {
+        toast.classList.remove("is-visible");
+      }, 1800);
+    }
+
+    const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let particles = [];
+    let width = 0;
+    let height = 0;
+    let animationFrame = null;
+    let heroVisible = true;
+
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      width = rect.width;
+      height = rect.height;
+      canvas.width = Math.floor(width * ratio);
+      canvas.height = Math.floor(height * ratio);
+      if (!ctx) return;
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      particles = Array.from({ length: width < 720 ? 32 : 52 }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.34,
+        vy: (Math.random() - 0.5) * 0.34,
+        size: Math.random() * 1.7 + 1,
+      }));
+      syncAnimation();
+    }
+
+    function getColor(name) {
+      return getComputedStyle(themeTarget).getPropertyValue(name).trim();
+    }
+
+    function draw() {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, width, height);
+      const ink = getColor("--ink");
+      const accent = getColor("--accent");
+      const accentTwo = getColor("--accent-2");
+
+      for (let i = 0; i < particles.length; i += 1) {
+        const p = particles[i];
+        if (!motionPreference.matches) {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0 || p.x > width) p.vx *= -1;
+          if (p.y < 0 || p.y > height) p.vy *= -1;
+        }
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = i % 3 === 0 ? accent : ink;
+        ctx.globalAlpha = 0.28;
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j += 1) {
+          const q = particles[j];
+          const dx = p.x - q.x;
+          const dy = p.y - q.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 130) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = i % 4 === 0 ? accentTwo : ink;
+            ctx.globalAlpha = (1 - dist / 130) * 0.15;
+            ctx.stroke();
+          }
+        }
+      }
+      ctx.globalAlpha = 1;
+
+    }
+
+    function animate() {
+      draw();
+      animationFrame = requestAnimationFrame(animate);
+    }
+
+    // Keep a single animation loop across resizes, theme changes and visibility changes.
+    function syncAnimation() {
+      cancelAnimationFrame(animationFrame);
+      animationFrame = null;
+      draw();
+      if (ctx && !motionPreference.matches && !document.hidden && heroVisible) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    }
+
+    window.addEventListener("resize", resizeCanvas, { passive: true });
+    document.addEventListener("visibilitychange", syncAnimation);
+    motionPreference.addEventListener("change", syncAnimation);
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(entries => {
+        heroVisible = entries[0].isIntersecting;
+        syncAnimation();
+      }).observe(canvas);
+    }
+    if ("ResizeObserver" in window) {
+      new ResizeObserver(entries => {
+        themeTarget.style.setProperty("--nav-height", `${entries[0].target.getBoundingClientRect().height}px`);
+      }).observe(document.querySelector(".topbar"));
+    }
+    resizeCanvas();
+  </script>
+</body>
+</html>
